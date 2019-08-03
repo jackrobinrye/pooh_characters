@@ -2,4 +2,5 @@
 
 require './lib/pooh_characters'
 
+
 PoohCharacters::CLI.new.call
