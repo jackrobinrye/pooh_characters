@@ -5,4 +5,5 @@ require_relative './pooh_characters/character'
 
 require 'open-uri'
 require 'nokogiri'
+# require 'pry'
 

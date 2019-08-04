@@ -7,6 +7,7 @@ class PoohCharacters::CLI
 
     def list_characters
         # puts "The Winnie the Pooh Characters to choose from are:"
+        PoohCharacters::Character.create_characters
         @characters = PoohCharacters::Character.all .each_with_index do |character, index|
             puts "#{index+1}. #{character.name}"
         end 
@@ -15,16 +16,19 @@ class PoohCharacters::CLI
     def menu 
         input = nil
         while input != "exit"
-            puts "Choose the character you'd like to more info on, type 'list' to list all your options again, or type 'exit' to exit:"
+            puts "Type the number for the character you'd like to more info on, type 'list' to list all your options again, or type 'exit' to exit:"
             input = gets.strip
-            case input 
-            when "1"
-                puts "More info on 1"
-            when "2"
-                puts "More info on 2"
-            when "list"
-                list_characters 
-            when !"exit"
+            index = input.to_i - 1
+            if index < PoohCharacters::Character.all.size
+                puts "You have chosen #{PoohCharacters::Character.all[index].name}."
+                puts "Type 'quote' for a random quote or type 'url' for a url to the character's main page."
+                input = gets.strip 
+                if input == 'quote'
+                    puts PoohCharacters::Character.all[index].random_quote
+                elsif input == "url"
+                    puts PoohCharacters::Character.all[index].url
+                end
+            elsif !"exit"
                 puts "Not sure what you meant there. Please try again."
             end 
         end 

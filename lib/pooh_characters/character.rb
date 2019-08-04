@@ -1,46 +1,41 @@
-
 class PoohCharacters::Character
 
-    attr_accessor :name, :blurb, :picture_url, :url 
+    attr_accessor :name, :url 
+    @@all = []
 
     def initialize(name)
         @name = name
-        @@all << self
     end 
 
     def self.all 
-        pooh = self.new 
-        pooh.name = "Winnie the Pooh"
-        pooh.blurb = "blurb"
-        pooh.picture_url = "pic url"
-        pooh.url = "url"
-
-        piglet = self.new 
-        piglet.name = "Piglet"
-        piglet.blurb = "blurb"
-        piglet.picture_url = "pic url"
-        piglet.url = "url"
-
-
-        [pooh, piglet]
+        @@all
     end 
 
-    def create_characters
+    def self.create_characters
+        #generates an array of names
         names = []
-        page = Nokogiri::HTML(open("https://winniethepooh.disney.com/characters"))
-        parsed_information = page.css('div.entity-details h3').each do |messy_name|
-            name = messy_name.text.strip
-            names << name
-        end 
-        names.each do |name|
-            self.new(name)
-            self.url = "https://winniethepooh.disney.com/#{name.gsub(" ", "-")}"
-            specific_page = Nokogiri::HTML(open(url))
-        end 
+        url = "http://www.just-pooh.com/100acre.html"
+        page = Nokogiri::HTML(open(url))
 
-        p names
-        
+        page.css('div.character h2').each do |x| 
+            names << x.text
+        end
+
+        #creates character objects from the name array
+        names.each do |name|
+            character = self.new(name)
+            @@all << character
+        end       
     end 
 
+    def random_quote
+        url = self.url
+        doc = Nokogiri::HTML(open(url))
+        parsed_info = doc.css('#content ul').text.split(/\n+/).each do |x| 
+            x.strip!
+        end
+        parsed_info.shift
+        puts parsed_info.sample
+    end 
 
 end 
