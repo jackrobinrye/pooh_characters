@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jack"]
   spec.email         = ["jackrrye@gmail.com"]
 
-  spec.summary       = "insert summary later"
-  spec.description   = "insert summary later"
+  spec.summary       = "scrapes the just-pooh website for characters, their quotes, and their URLs"
+  spec.description   = "create character objects based on scraped data from the just-pooh website in order to use CLI and grab quotes, urls, and names of characters"
   spec.homepage      = "https://github.com/jackrobinrye/pooh_characters"
   spec.license       = "MIT"
 

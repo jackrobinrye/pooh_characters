@@ -13,31 +13,21 @@ class PoohCharacters::Character
     end 
 
     def self.create_characters
-        #generates an array of names
-        names = []
-        url = "http://www.just-pooh.com/100acre.html"
-        page = Nokogiri::HTML(open(url))
-
+        #scrapes the just-pooh webpage
+        page = Nokogiri::HTML(open("http://www.just-pooh.com/100acre.html"))
+        #iterates through the scraped names to create character objects
         page.css('div.character h2').each do |x| 
-            names << x.text
+            @@all << self.new(x.text)
         end
 
-        #creates character objects from the name array
-        names.each do |name|
-            character = self.new(name)
-            @@all << character
-        end
-        
-        #assigns a url to each character 
+        #iterates through the character array and assigns a url to each character 
         @@all.each_with_index do |character, index|
             character.url = "http://www.just-pooh.com#{page.css('div.character h2')[index].to_s.scan(/"([^"]*)"/).to_s.gsub("[", "").gsub("]", "").gsub('"', "")}"
-            # binding.pry
         end 
     end 
 
     def random_quote
-        url = self.url
-        doc = Nokogiri::HTML(open(url))
+        doc = Nokogiri::HTML(open(self.url))
         parsed_info = doc.css('#content ul').text.split(/\n+/).each do |x| 
             x.strip!
         end
