@@ -1,8 +1,6 @@
 # PoohCharacters
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/pooh_characters`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to  the PoohCharacters gem! In this gem you will run ./bin/pooh-characters to run a CLI that will allow you to look at different Winnie the Pooh characters, get urls to their individual pages, and get a random quote from them.
 
 ## Installation
 
@@ -22,7 +20,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run the pooh-characters file by typing
+    $ ./bin/pooh-characters
+to open the CLI. In the CLI you will be prompted to pick a Winnie the Pooh character from a list. 
+Type 'list' to list the characters again. 
+Type the number corresponding to the character you want to choose, then press enter. 
+Next, you will be asked if you want to get the url or a random quote from that character. 
+As prompted, type 'quote' for a quote, or type 'url' for the url to that individual character's page. 
+You will remain in the url/quote menu until you type 'exit' to exit to the previous menu.
+You will remain in the character selection menu until you type 'exit' to exit.
+Any input outside of expected parameters will result in a prompt to try again.
 
 ## Development
 
