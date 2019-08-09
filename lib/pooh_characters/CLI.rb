@@ -19,7 +19,7 @@ class PoohCharacters::CLI
 
     def second_prompt(index)
         puts "You have chosen #{PoohCharacters::Character.all[index].name}."
-        puts "Type 'quote' for a random quote, type 'url' for a url to the character's main page, type 'list' to repeat the list of characters, or type 'exit' to return to the previous menu."
+        puts "Type 'quote' for a random quote, type 'url' for the url to the character's main page, type 'list' to repeat the list of characters, or type 'exit' to return to the previous menu."
     end
 
     def sorry 
@@ -35,19 +35,19 @@ class PoohCharacters::CLI
 
         while input != "exit"
             intro_prompt
-            input = gets.strip
+            input = gets.strip.downcase
             index = input.to_i - 1
 
             if index < PoohCharacters::Character.all.size && index >= 0
                 inner_input = nil
                 while inner_input != "exit"
                     second_prompt(index)
-                    inner_input = gets.strip 
+                    inner_input = gets.strip.downcase 
                     if inner_input == 'quote'
                         if index == 9 
                             puts "There are no quotes for Heffalump. Sorry!"
                         else 
-                            puts PoohCharacters::Character.all[index].random_quote
+                            puts PoohCharacters::Character.all[index].random_quote()
                         end 
                     elsif inner_input == "url"
                         puts PoohCharacters::Character.all[index].url
